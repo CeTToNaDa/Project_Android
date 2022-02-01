@@ -6,7 +6,7 @@ from uiautomator import Device
 
 
 deviceSerial = subprocess.check_output("adb devices -l | grep SM | awk '{print $1}'", shell=True).decode('utf-8').rstrip()
-device = Device(deviceSerial)
+device = Device(deviceSerial)   
 testResult = True
 
 all_Aps = ["Play Store", "Maps", "Chrome", "Messages", "Camera", "Clock", "Contacts", "Settings", "Calendar", "Play Music", "Samsung Notes"]
@@ -149,6 +149,7 @@ def run_antutu():
 
 def start_camera():
     subprocess.run("adb -s " + deviceSerial + " shell input keyevent 27", shell=True)
+    time.sleep(2)
     if device.exists(text="Shutter", packageName="com.sec.android.app.camera"):
         successMessage("Camera app is open")
     else:
